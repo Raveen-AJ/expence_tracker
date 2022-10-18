@@ -1,4 +1,4 @@
-# spence_tracker
+# expence_tracker
 
 A new Flutter project.
 
