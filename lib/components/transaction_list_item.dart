@@ -37,10 +37,10 @@ class TransactionListItem extends StatelessWidget {
                 transaction.title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontSize: 15,
                 ),
               ),
-              Text(DateFormat.yMMMd().format(transaction.date)),
+              Text(DateFormat.yMMMd().format(transaction.date), style: TextStyle(color: Colors.grey),),
             ],
           )
         ],
