@@ -40,7 +40,10 @@ class TransactionListItem extends StatelessWidget {
                   fontSize: 15,
                 ),
               ),
-              Text(DateFormat.yMMMd().format(transaction.date), style: TextStyle(color: Colors.grey),),
+              Text(
+                DateFormat.yMMMd().format(transaction.date),
+                style: const TextStyle(color: Colors.grey),
+              ),
             ],
           )
         ],
