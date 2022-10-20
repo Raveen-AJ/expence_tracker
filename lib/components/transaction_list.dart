@@ -13,12 +13,14 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        children: [
-          ...transactions.map((tx) => TransactionListItem(
-                transaction: tx,
-              ))
-        ],
+      child: SizedBox(
+        height: 350,
+        child: ListView.builder(
+          itemCount: transactions.length,
+          itemBuilder: (ctx, index) {
+            return TransactionListItem(transaction: transactions[index]);
+          },
+        ),
       ),
     );
   }
