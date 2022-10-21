@@ -13,15 +13,34 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: SizedBox(
-        height: 350,
-        child: ListView.builder(
-          itemCount: transactions.length,
-          itemBuilder: (ctx, index) {
-            return TransactionListItem(transaction: transactions[index]);
-          },
-        ),
-      ),
+      child: transactions.isEmpty
+          ? Column(
+              children: [
+                Text(
+                  "No transactions added",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
+                  height: 200,
+                  child: Image(
+                    image: AssetImage('assets/images/waiting.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            )
+          : SizedBox(
+              height: 350,
+              child: ListView.builder(
+                itemCount: transactions.length,
+                itemBuilder: (ctx, index) {
+                  return TransactionListItem(transaction: transactions[index]);
+                },
+              ),
+            ),
     );
   }
 }
