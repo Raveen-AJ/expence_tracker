@@ -11,8 +11,27 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: _HomePage(),
+    return MaterialApp(
+      home: const _HomePage(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Colors.amber,
+          primary: Colors.purple,
+        ),
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
+            fontFamily: 'Quicksands',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
+        ),
+      ),
     );
   }
 }
