@@ -26,7 +26,7 @@ class Chart extends StatelessWidget {
       return {
         'day': DateFormat.E().format(weekday)[0],
         'value': dayTotal,
-        'percentage': weekTotal == 0 ? 0 : dayTotal / weekTotal
+        'percentage': weekTotal == 0 ? 0.0 : dayTotal / weekTotal
       };
     }).reversed.toList();
   }
