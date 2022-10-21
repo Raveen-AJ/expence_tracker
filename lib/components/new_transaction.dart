@@ -29,6 +29,7 @@ class _NewTransactionState extends State<NewTransaction> {
           TextField(
             decoration: const InputDecoration(label: Text("Amount")),
             controller: _amountController,
+            keyboardType: TextInputType.number,
           ),
           TextButton(
             onPressed: () {
