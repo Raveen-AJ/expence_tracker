@@ -30,6 +30,10 @@ class _NewTransactionState extends State<NewTransaction> {
             decoration: const InputDecoration(label: Text("Amount")),
             controller: _amountController,
             keyboardType: TextInputType.number,
+            onSubmitted: (_) {
+              widget.addTransactionHandler(
+                  _titleController.text, double.parse(_amountController.text));
+            },
           ),
           TextButton(
             onPressed: () {

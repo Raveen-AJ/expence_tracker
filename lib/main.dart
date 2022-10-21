@@ -36,6 +36,9 @@ class _HomePageState extends State<_HomePage> {
   ];
 
   void _addTransaction(String title, double amount) {
+    if (title.isEmpty || amount.isNegative || amount.isNaN) {
+      return;
+    }
     setState(() {
       _transactions.add(Transaction(
         title: title,
@@ -44,6 +47,7 @@ class _HomePageState extends State<_HomePage> {
         id: DateTime.now().toString(),
       ));
     });
+    Navigator.of(context).pop();
   }
 
   void _startAddingTransaction(BuildContext ctx) {
