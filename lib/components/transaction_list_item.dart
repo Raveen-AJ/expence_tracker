@@ -20,12 +20,12 @@ class TransactionListItem extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             width: 90,
             decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1),
+              border: Border.all(color: Theme.of(context).primaryColor, width: 1),
             ),
             child: Text(
               '\$${transaction.amount.toStringAsFixed(2)}',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).primaryColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold
               ),

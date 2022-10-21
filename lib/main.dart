@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spence_tracker/components/chart.dart';
 
 import 'components/new_transaction.dart';
 import 'components/transaction_list.dart';
@@ -14,6 +15,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: const _HomePage(),
       theme: ThemeData(
+        primarySwatch: Colors.purple,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: Colors.amber,
           primary: Colors.purple,
@@ -44,15 +46,7 @@ class _HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<_HomePage> {
-  final List<Transaction> _transactions = [
-    // Transaction(
-    //     id: "t1", title: "Buy Macbook", amount: 129.99, date: DateTime.now()),
-    // Transaction(
-    //     id: "t1",
-    //     title: "Buy Iphone 14 pro max",
-    //     amount: 99.99,
-    //     date: DateTime.now()),
-  ];
+  final List<Transaction> _transactions = [];
 
   void _addTransaction(String title, double amount) {
     if (title.isEmpty || amount.isNegative || amount.isNaN) {
@@ -77,6 +71,12 @@ class _HomePageState extends State<_HomePage> {
         });
   }
 
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(const Duration(days: 7)));
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,12 +93,7 @@ class _HomePageState extends State<_HomePage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              const SizedBox(
-                width: double.infinity,
-                child: Card(
-                  child: Text("CHART"),
-                ),
-              ),
+              Chart(filteredTransactions: _recentTransactions),
               TransactionList(transactions: _transactions)
             ],
           ),
