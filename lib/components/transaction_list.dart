@@ -5,8 +5,10 @@ import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final Function deleteHandler;
 
-  const TransactionList({Key? key, required this.transactions})
+  const TransactionList(
+      {Key? key, required this.transactions, required this.deleteHandler})
       : super(key: key);
 
   @override
@@ -16,6 +18,7 @@ class TransactionList extends StatelessWidget {
       child: transactions.isEmpty
           ? Column(
               children: [
+                const SizedBox(height: 20),
                 Text(
                   "No transactions added",
                   style: Theme.of(context).textTheme.titleLarge,
@@ -37,7 +40,10 @@ class TransactionList extends StatelessWidget {
               child: ListView.builder(
                 itemCount: transactions.length,
                 itemBuilder: (ctx, index) {
-                  return TransactionListItem(transaction: transactions[index]);
+                  return TransactionListItem(
+                    transaction: transactions[index],
+                    deleteHandler: deleteHandler,
+                  );
                 },
               ),
             ),
