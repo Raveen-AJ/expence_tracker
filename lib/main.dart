@@ -53,15 +53,15 @@ class _HomePage extends StatefulWidget {
 class _HomePageState extends State<_HomePage> {
   final List<Transaction> _transactions = [];
 
-  void _addTransaction(String title, double amount) {
-    if (title.isEmpty || amount.isNegative || amount.isNaN) {
+  void _addTransaction(String title, double amount, DateTime? date) {
+    if (title.isEmpty || amount.isNegative || amount.isNaN || date == null) {
       return;
     }
     setState(() {
       _transactions.add(Transaction(
         title: title,
         amount: amount,
-        date: DateTime.now(),
+        date: date,
         id: DateTime.now().toString(),
       ));
     });
@@ -108,7 +108,6 @@ class _HomePageState extends State<_HomePage> {
         child: const Icon(Icons.add),
         onPressed: () => _startAddingTransaction(context),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
