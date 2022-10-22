@@ -12,7 +12,7 @@ class ChartBar extends StatelessWidget {
         SizedBox(
           height: 20,
           child: FittedBox(
-              child: Text('\$${barData['value']}'),
+              child: Text('\$${barData['value']}', style: Theme.of(context).textTheme.bodyMedium,),
           ),
         ),
         Container(
@@ -36,7 +36,7 @@ class ChartBar extends StatelessWidget {
             ),
           ),
         ),
-        Text(barData['day'] as String)
+        Text(barData['day'] as String, style: Theme.of(context).textTheme.bodyMedium,)
       ],
     );
   }

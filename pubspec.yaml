@@ -78,7 +78,7 @@ flutter:
   # example:
   fonts:
    - family: OpenSans
-   - fonts:
+     fonts:
        - asset: assets/fonts/OpenSans-Regular.ttf
        - asset: assets/fonts/OpenSans-Bold.ttf
          weight: 700

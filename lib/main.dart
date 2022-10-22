@@ -19,12 +19,17 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: Colors.amber,
           primary: Colors.purple,
+          onPrimary: Colors.white,
+          onSecondary: Colors.black,
         ),
+        fontFamily: 'Quicksand',
         textTheme: const TextTheme(
           titleMedium: TextStyle(
-            fontFamily: 'Quicksands',
             fontSize: 18,
             fontWeight: FontWeight.bold,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 16,
           ),
         ),
         appBarTheme: const AppBarTheme(

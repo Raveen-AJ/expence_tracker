@@ -38,7 +38,7 @@ class Chart extends StatelessWidget {
       child: Card(
         elevation: 5,
         child: Container(
-          height: 130,
+          height: 132,
           padding: const EdgeInsets.all(10),
           child: Row(
             children: _barsData.map((data) {
