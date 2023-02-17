@@ -15,22 +15,24 @@ class ChartBar extends StatelessWidget {
               child: Text('\$${barData['value']}', style: Theme.of(context).textTheme.bodyMedium,),
           ),
         ),
-        Container(
-          width: 12,
-          height: 70,
-          decoration: const BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-            color: Colors.grey,
-          ),
-          child: FractionallySizedBox(
-            heightFactor: barData['percentage'] as double,
-            alignment: Alignment.topCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(12),
+        Expanded(
+          child: Container(
+            width: 12,
+            height: 70,
+            decoration: const BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              color: Colors.grey,
+            ),
+            child: FractionallySizedBox(
+              heightFactor: barData['percentage'] as double,
+              alignment: Alignment.topCenter,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(12),
+                  ),
                 ),
               ),
             ),

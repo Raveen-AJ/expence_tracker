@@ -51,7 +51,18 @@ class _HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<_HomePage> {
-  final List<Transaction> _transactions = [];
+  final List<Transaction> _transactions = [
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+  ];
 
   void _addTransaction(String title, double amount, DateTime? date) {
     if (title.isEmpty || amount.isNegative || amount.isNaN || date == null) {
@@ -90,26 +101,34 @@ class _HomePageState extends State<_HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: const Text("Expense Tracker"),
+      actions: [
+        IconButton(
+            onPressed: () => _startAddingTransaction(context),
+            icon: const Icon(Icons.add))
+      ],
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Expense Tracker"),
-        actions: [
-          IconButton(
-              onPressed: () => _startAddingTransaction(context),
-              icon: const Icon(Icons.add))
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              Chart(filteredTransactions: _recentTransactions),
-              TransactionList(transactions: _transactions, deleteHandler: _deleteTransaction,)
+              SizedBox(
+                  height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top - 20) * 0.3,
+                  child: Chart(filteredTransactions: _recentTransactions)
+              ),
+              SizedBox(
+                  height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top - 20) * 0.7,
+                  child: TransactionList(transactions: _transactions, deleteHandler: _deleteTransaction,)
+              )
             ],
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => _startAddingTransaction(context),
