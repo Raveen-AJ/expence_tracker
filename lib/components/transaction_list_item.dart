@@ -7,7 +7,8 @@ class TransactionListItem extends StatelessWidget {
   final Transaction transaction;
   final Function deleteHandler;
 
-  const TransactionListItem({Key? key, required this.transaction, required this.deleteHandler})
+  const TransactionListItem(
+      {Key? key, required this.transaction, required this.deleteHandler})
       : super(key: key);
 
   @override
@@ -32,10 +33,25 @@ class TransactionListItem extends StatelessWidget {
           subtitle: Text(
             DateFormat.yMMMd().format(transaction.date),
           ),
-          trailing: IconButton(
-            onPressed: () => deleteHandler(transaction.id),
-            icon: Icon(Icons.delete, color: Theme.of(context).colorScheme.error,),
-          ),
+          trailing: MediaQuery.of(context).size.width > 400
+              ? TextButton.icon(
+                  onPressed: () => deleteHandler(transaction.id),
+                  icon: Icon(
+                    Icons.delete,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  label: Text(
+                    "Delete",
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.error),
+                  ))
+              : IconButton(
+                  onPressed: () => deleteHandler(transaction.id),
+                  icon: Icon(
+                    Icons.delete,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                ),
         ));
   }
 }
