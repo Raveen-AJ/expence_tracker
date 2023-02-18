@@ -35,42 +35,49 @@ class _NewTransactionState extends State<NewTransaction> {
   Widget build(BuildContext context) {
     return Container(
       height: 400,
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          TextField(
-            decoration: const InputDecoration(label: Text("Title")),
-            controller: _titleController,
-          ),
-          TextField(
-            decoration: const InputDecoration(label: Text("Amount")),
-            controller: _amountController,
-            keyboardType: TextInputType.number,
-            onSubmitted: (_) {
-              widget.addTransactionHandler(
-                  _titleController.text, double.parse(_amountController.text));
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(_selectedDate == null
-                  ? "No date picked"
-                  : "Picked date: ${DateFormat.yMd().format(_selectedDate!)}"),
-              TextButton(
-                  onPressed: _presetDatePicker,
-                  child: const Text('Choose Date', style: TextStyle(fontWeight: FontWeight.bold)))
-            ],
-          ),
-          ElevatedButton(
-            onPressed: () {
-              widget.addTransactionHandler(
-                  _titleController.text, double.parse(_amountController.text), _selectedDate);
-            },
-            child: const Text("Save Transaction"),
-          )
-        ],
+      padding: EdgeInsets.only(
+        left: 10,
+        top: 10,
+        right: 10,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 10
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            TextField(
+              decoration: const InputDecoration(label: Text("Title")),
+              controller: _titleController,
+            ),
+            TextField(
+              decoration: const InputDecoration(label: Text("Amount")),
+              controller: _amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) {
+                widget.addTransactionHandler(
+                    _titleController.text, double.parse(_amountController.text));
+              },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(_selectedDate == null
+                    ? "No date picked"
+                    : "Picked date: ${DateFormat.yMd().format(_selectedDate!)}"),
+                TextButton(
+                    onPressed: _presetDatePicker,
+                    child: const Text('Choose Date', style: TextStyle(fontWeight: FontWeight.bold)))
+              ],
+            ),
+            ElevatedButton(
+              onPressed: () {
+                widget.addTransactionHandler(
+                    _titleController.text, double.parse(_amountController.text), _selectedDate);
+              },
+              child: const Text("Save Transaction"),
+            )
+          ],
+        ),
       ),
     );
   }
