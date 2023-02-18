@@ -53,16 +53,17 @@ class _HomePage extends StatefulWidget {
 class _HomePageState extends State<_HomePage> {
   final List<Transaction> _transactions = [
     Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
-    Transaction(id: "1", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "2", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "3", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "4", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "5", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "6", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "7", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "8", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "9", title: "as", amount: 1, date: DateTime.now()),
+    Transaction(id: "10", title: "as", amount: 1, date: DateTime.now()),
   ];
+  bool showChart = false;
 
   void _addTransaction(String title, double amount, DateTime? date) {
     if (title.isEmpty || amount.isNegative || amount.isNaN || date == null) {
@@ -101,6 +102,9 @@ class _HomePageState extends State<_HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
+
     final appBar = AppBar(
       title: const Text("Expense Tracker"),
       actions: [
@@ -109,6 +113,26 @@ class _HomePageState extends State<_HomePage> {
             icon: const Icon(Icons.add))
       ],
     );
+
+    final chart = SizedBox(
+        height: (mediaQuery.size.height -
+                appBar.preferredSize.height -
+                mediaQuery.padding.top -
+                (isLandscape ? 70 : 20)) *
+            (isLandscape ? 1 : 0.3),
+        child: Chart(filteredTransactions: _recentTransactions));
+
+    final transactionList = SizedBox(
+        height: (mediaQuery.size.height -
+                appBar.preferredSize.height -
+                mediaQuery.padding.top -
+                (isLandscape ? 70 : 20)) *
+            (isLandscape ? 1: 0.7),
+        child: TransactionList(
+          transactions: _transactions,
+          deleteHandler: _deleteTransaction,
+        ));
+
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
@@ -116,14 +140,26 @@ class _HomePageState extends State<_HomePage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SizedBox(
-                  height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top - 20) * 0.3,
-                  child: Chart(filteredTransactions: _recentTransactions)
-              ),
-              SizedBox(
-                  height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top - 20) * 0.7,
-                  child: TransactionList(transactions: _transactions, deleteHandler: _deleteTransaction,)
-              )
+              if (isLandscape)
+                SizedBox(
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Show Chart "),
+                      Switch(
+                          value: showChart,
+                          onChanged: (val) {
+                            setState(() {
+                              showChart = val;
+                            });
+                          })
+                    ],
+                  ),
+                ),
+              if (isLandscape) showChart ? chart : transactionList,
+              if (!isLandscape) chart,
+              if (!isLandscape) transactionList,
             ],
           ),
         ),
